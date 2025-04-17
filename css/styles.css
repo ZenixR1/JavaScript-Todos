@@ -1,0 +1,81 @@
+:root{
+    --main-color: #313131;
+    --second-color: #414141;
+    --third-color: #525252;
+    --accent-color: #a200ff;
+    --text-color: #ffffff;
+}
+
+*{
+    margin: 0;
+    font-family: 'Roboto';
+}
+body{
+    background-color: var(--main-color);
+}
+
+.main-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.headerDiv{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: fit-content;
+    margin: 5px 2px;
+    padding: 15px;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+.mainHeader{
+    display: inline-flex;
+    text-align: center;
+    width: fit-content;
+    color: var(--text-color);
+}
+
+.content-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width:800px;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.input-container{
+    display: flex;
+    justify-content: center;
+    width: fit-content;
+}
+
+#createTask{
+    border: 2px solid black;
+    border-radius: 8px;
+    background-color: whitesmoke;
+}
+
+#addBtn{
+    border: 2px solid black;
+    border-radius: 5px;
+    background-color: whitesmoke;
+}
+
+.todo-container{
+    display:flex;
+    flex-direction: row;
+    margin: 5px;
+}
+
+.li-container{
+
+}
+
+.todoItem{
+
+}
