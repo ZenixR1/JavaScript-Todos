@@ -6,7 +6,10 @@ const createTask = document.querySelector('#createTask');
 const addBtn = document.querySelector('#addBtn');
 //DOM for il container
 const liContainer = document.querySelector('.li-container');
-
+//DOM for headerDiv
+const header = document.querySelector('.headerDiv');
+//DOM for content-container
+const contentContainer = document.querySelector('.content-container')
 
 //Events listener for add button
 addBtn.addEventListener("click",addToDo)
@@ -32,12 +35,13 @@ function addToDo(){
     const checkboxContainer = document.createElement('div');
     checkboxContainer.style.backgroundColor = 'whitesmoke';
     checkboxContainer.style.border = '2px solid black';
-    checkboxContainer.style.borderRadius = '5px';
+    checkboxContainer.style.borderRadius = '8px';
     checkboxContainer.style.padding = '5px';
     checkboxContainer.innerHTML = 
     `
     <input type="checkbox" id="taskCheck"/>
     `;
+    checkboxContainer.style.marginRight = '5px';
 
     const createLi = document.createElement('div'); 
     createLi.classList.add('.createdTask');
@@ -46,11 +50,13 @@ function addToDo(){
         <li>${task}</li>
     `;
     //add styling
+    createLi.style.backgroundColor = 'whitesmoke';
     createLi.style.listStyle = 'none';
     createLi.style.border = '2px solid black';
-    createLi.style.borderRadius = '5px';
+    createLi.style.borderRadius = '8px';
     createLi.style.display = 'flex';
     createLi.style.flexDirection = 'row';
+    createLi.style.textAlign = 'center';
 
     todoContainer.append(checkboxContainer);
     todoContainer.append(createLi);
@@ -67,8 +73,6 @@ function addToDo(){
         
         if(this.checked){
             text.style.backgroundColor = 'green';
-        } else {
-            text.style.backgroundColor = 'whitesmoke';
         }
 
         if (text.style.textDecoration === 'line-through'){
