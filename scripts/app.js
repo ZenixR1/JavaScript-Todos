@@ -44,17 +44,18 @@ createTask.addEventListener("keydown",function(event){
 
 function addToDo(){
     const task = createTask.value; //grabs the value from the input
-    const todoContainer = document.createElement('div');
+    const todoContent = document.createElement('div');
 
     if (task != ''){ //This if statement prevents an empty submission from being passed.
         //setting the li-container to be flex column
             liContainer.style.display = 'flex';
             liContainer.style.flexDirection = 'column';
+            liContainer.style.padding = '0';
 
         //setting the todo-container to be flex row
-            todoContainer.style.display = 'flex';
-            todoContainer.style.flexDirection = 'row';
-            todoContainer.style.margin = '2px';
+            todoContent.style.display = 'flex';
+            todoContent.style.flexDirection = 'row';
+            todoContent.style.margin = '2px';
         //create the div that houses the priority flag
             const priorityFlag = document.createElement('div');
             const flag = document.createElement('svg');
@@ -76,6 +77,7 @@ function addToDo(){
             `
             <input type="checkbox" id="taskCheck"/>
             `;
+            checkboxContainer.style.marginLeft = '5px';
             checkboxContainer.style.marginRight = '5px';
         // create the task div which provides the task li --- lines 47-58 are additions to the createLi div.
             const createLi = document.createElement('div'); 
@@ -97,12 +99,12 @@ function addToDo(){
             const upPriority = document.createElement('div');
             const downPriority = document.createElement('div');
 
-            todoContainer.append(priorityFlag)
-            todoContainer.append(checkboxContainer); //These two combine the checkbox div and the task li divs. 
-            todoContainer.append(createLi);
-            todoContainer.append(priorityToggles);
+            todoContent.append(priorityFlag)
+            todoContent.append(checkboxContainer); //These two combine the checkbox div and the task li divs. 
+            todoContent.append(createLi);
+            todoContent.append(priorityToggles);
 
-            liContainer.append(todoContainer);//This adds the combined divs to the UL "li-container"
+            liContainer.append(todoContent);//This adds the combined divs to the UL "li-container"
             
             createTask.value = ''; //Clear the text after submission.
 
