@@ -17,20 +17,23 @@ const contentContainer = document.querySelector('.content-container')
 const inputContainer = document.querySelector('.input-container');
 
 
-
-body.style.backgroundColor = '#333333';//styling for the body
-
-header.style.backgroundColor = '#1a1a1a';//styling for header
-
-contentContainer.style.backgroundColor = '#1a1a1a'//styling for the contentContainer
-
+//styling for the body
+body.style.backgroundColor = '#333333';
+//styling for header
+header.style.backgroundColor = '#1a1a1a';
+//styling for the contentContainer
+contentContainer.style.backgroundColor = '#1a1a1a'
+//styling for the input field
 inputContainer.style.padding = '5px';
 inputContainer.style.border = '2px solid black';
 inputContainer.style.borderRadius = '8px';
 
+
 //Adding placeholder text to input field as well as padding.
-createTask.placeholder = 'Select Enter to add Task!';
+createTask.placeholder = 'Add a task then press Enter!';
 createTask.style.padding = '8px';
+createTask.style.fieldSizing = 'content';
+
 
 createTask.addEventListener("keydown",function(event){
     if (event.key === "Enter"){
@@ -51,20 +54,32 @@ function addToDo(){
         //setting the todo-container to be flex row
             todoContainer.style.display = 'flex';
             todoContainer.style.flexDirection = 'row';
+            todoContainer.style.margin = '2px';
+        //create the div that houses the priority flag
+            const priorityFlag = document.createElement('div');
+            const flag = document.createElement('svg');
+            priorityFlag.style.backgroundColor = '#333333';
+            priorityFlag.style.border = '2px solid black';
+            priorityFlag.style.borderRadius = '8px';
+            priorityFlag.style.padding = '10px';
+            priorityFlag.style.width = 'max-content'
+            flag.classList.add('fa-solid');
+            flag.classList.add('fa-chevron-up');
+            priorityFlag.append(flag);
         // create the checkbox div and style it
             const checkboxContainer = document.createElement('div');
             checkboxContainer.style.backgroundColor = '#333333';
             checkboxContainer.style.border = '2px solid black';
             checkboxContainer.style.borderRadius = '8px';
-            checkboxContainer.style.padding = '5px';
+            checkboxContainer.style.padding = '10px';
             checkboxContainer.innerHTML = 
             `
             <input type="checkbox" id="taskCheck"/>
             `;
             checkboxContainer.style.marginRight = '5px';
-
-            const createLi = document.createElement('div'); //This creates the div that houses the task.
-            createLi.classList.add('.createdTask');  // --- lines 47-58 are additions to the createLi div.
+        // create the task div which provides the task li --- lines 47-58 are additions to the createLi div.
+            const createLi = document.createElement('div'); 
+            createLi.classList.add('.createdTask');
             createLi.innerHTML = 
             `
                 <li>${task}</li>
@@ -76,10 +91,16 @@ function addToDo(){
             createLi.style.display = 'flex';
             createLi.style.flexDirection = 'row';
             createLi.style.textAlign = 'center';
-            createLi.style.padding = '5px';
+            createLi.style.padding = '10px';
+        //create the div and divs for the up and down arrows for priority
+            const priorityToggles = document.createElement('div');
+            const upPriority = document.createElement('div');
+            const downPriority = document.createElement('div');
 
+            todoContainer.append(priorityFlag)
             todoContainer.append(checkboxContainer); //These two combine the checkbox div and the task li divs. 
             todoContainer.append(createLi);
+            todoContainer.append(priorityToggles);
 
             liContainer.append(todoContainer);//This adds the combined divs to the UL "li-container"
             
