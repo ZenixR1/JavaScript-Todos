@@ -15,6 +15,8 @@ const header = document.querySelector('.headerDiv');
 const contentContainer = document.querySelector('.content-container')
 //DOM for input-container
 const inputContainer = document.querySelector('.input-container');
+//DOM for todo-container
+const todoContainer = document.querySelector('.todo-container');
 
 
 //styling for the body
@@ -22,11 +24,21 @@ body.style.backgroundColor = '#333333';
 //styling for header
 header.style.backgroundColor = '#1a1a1a';
 //styling for the contentContainer
-contentContainer.style.backgroundColor = '#1a1a1a'
+contentContainer.style.backgroundColor = '#1a1a1a';
+//styling for todo container
+todoContainer.style.display = 'flex';
+todoContainer.style.flexDirection = 'column';
+todoContainer.style.margin = '8px';
+todoContainer.style.padding = '10px';
+todoContainer.style.border = '2px solid black';
+todoContainer.style.borderRadius = '8px';
 //styling for the input field
+inputContainer.style.margin = '8px';
 inputContainer.style.padding = '5px';
 inputContainer.style.border = '2px solid black';
 inputContainer.style.borderRadius = '8px';
+inputContainer.style.alignSelf = 'center';
+
 
 
 //Adding placeholder text to input field as well as padding.
@@ -38,7 +50,7 @@ createTask.style.fieldSizing = 'content';
 createTask.addEventListener("keydown",function(event){
     if (event.key === "Enter"){
         addToDo();
-        console.log('test');
+        console.log('Task has been entered successfully');
     }
 });//Events listener for add button
 
@@ -118,6 +130,8 @@ function addToDo(){
                 
                 if(this.checked){
                     text.style.backgroundColor = 'green';
+                }else {
+                    text.style.backgroundColor = '#333333';
                 }
 
                 if (text.style.textDecoration === 'line-through'){
