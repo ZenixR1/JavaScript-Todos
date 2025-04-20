@@ -23,8 +23,8 @@ const todoContainer = document.querySelector('.todo-container');
 body.style.backgroundColor = '#333333';
 //styling for header
 header.style.backgroundColor = '#1a1a1a';
-//styling for the contentContainer
-contentContainer.style.backgroundColor = '#1a1a1a';
+header.style.zIndex = '1';
+header.style.boxShadow = '2px 2px 15px #a200ff';
 //styling for todo container
 todoContainer.style.display = 'flex';
 todoContainer.style.flexDirection = 'column';
@@ -32,19 +32,30 @@ todoContainer.style.margin = '8px';
 todoContainer.style.padding = '10px';
 todoContainer.style.border = '2px solid black';
 todoContainer.style.borderRadius = '8px';
+todoContainer.style.backgroundColor =' #1a1a1a';
+todoContainer.style.minWidth = '35rem'
+todoContainer.style.minHeight = '10rem';
+todoContainer.style.boxShadow = '5px 5px 100px #a200ff'
 //styling for the input field
 inputContainer.style.margin = '8px';
-inputContainer.style.padding = '5px';
+inputContainer.style.padding = '8px';
 inputContainer.style.border = '2px solid black';
 inputContainer.style.borderRadius = '8px';
 inputContainer.style.alignSelf = 'center';
+inputContainer.style.backgroundColor = '#333333';
+inputContainer.style.transition = 'all 1s';
+inputContainer.style.display = 'flex';
+inputContainer.style.justifyContent = 'center';
+inputContainer.style.boxShadow = '2px 2px 15px #a200ff';
+
 
 
 
 //Adding placeholder text to input field as well as padding.
 createTask.placeholder = 'Add a task then press Enter!';
 createTask.style.padding = '8px';
-createTask.style.fieldSizing = 'content';
+createTask.style.minWidth = '12rem'
+
 
 
 createTask.addEventListener("keydown",function(event){
@@ -106,6 +117,7 @@ function addToDo(){
             createLi.style.flexDirection = 'row';
             createLi.style.textAlign = 'center';
             createLi.style.padding = '10px';
+            createLi.style.minWidth = '25rem'
         //create the div and divs for the up and down arrows for priority
             const priorityToggles = document.createElement('div');
             const upPriority = document.createElement('div');

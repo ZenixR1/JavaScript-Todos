@@ -43,15 +43,11 @@ body{
     flex-direction: column;
     align-items: center;
     width:800px;
-    border: 2px solid black;
-    border-radius: 5px;
-    padding: 10px;
+
 }
 
-.input-container{
-    display: flex;
-    justify-content: center;
-    width: fit-content;
+.input-container:hover{
+    transform: scale(1.1);
 }
 
 #createTask{
@@ -66,9 +62,4 @@ body{
     background-color: whitesmoke;
 }
 
-.todo-container{
-    display:flex;
-    flex-direction: row;
-    margin: 5px;
-}
 
