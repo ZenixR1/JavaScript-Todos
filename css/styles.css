@@ -51,9 +51,12 @@ body{
 }
 
 #createTask{
-    border: 2px solid black;
+    border: 2.5px solid black;
     border-radius: 8px;
     background-color: whitesmoke;
+}
+#createTask::placeholder{
+    text-align: center;
 }
 
 #addBtn{

@@ -53,8 +53,10 @@ inputContainer.style.boxShadow = '2px 2px 15px #a200ff';
 
 //Adding placeholder text to input field as well as padding.
 createTask.placeholder = 'Add a task then press Enter!';
+createTask.textAlign = 'center';
 createTask.style.padding = '8px';
-createTask.style.minWidth = '12rem'
+createTask.style.minWidth = '25rem'
+
 
 
 
@@ -118,6 +120,9 @@ function addToDo(){
             createLi.style.textAlign = 'center';
             createLi.style.padding = '10px';
             createLi.style.minWidth = '25rem'
+            createLi.style.color = '#ffffff';
+            createLi.style.font = 'Roboto';
+            createLi.style.fontWeight = '500';
         //create the div and divs for the up and down arrows for priority
             const priorityToggles = document.createElement('div');
             const upPriority = document.createElement('div');
@@ -127,6 +132,7 @@ function addToDo(){
             todoContent.append(checkboxContainer); //These two combine the checkbox div and the task li divs. 
             todoContent.append(createLi);
             todoContent.append(priorityToggles);
+            todoContent.style.zIndex = '1';
 
             liContainer.append(todoContent);//This adds the combined divs to the UL "li-container"
             
