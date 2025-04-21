@@ -64,5 +64,11 @@ body{
     border-radius: 5px;
     background-color: whitesmoke;
 }
-
+li.createdTask{
+    text-wrap: balance;
+}
+#taskCheck{
+    height: 18px;
+    width: 18px;
+}
 

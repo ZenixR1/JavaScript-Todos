@@ -83,15 +83,19 @@ function addToDo(){
             todoContent.style.margin = '2px';
         //create the div that houses the priority flag
             const priorityFlag = document.createElement('div');
-            const flag = document.createElement('svg');
             priorityFlag.style.backgroundColor = '#333333';
             priorityFlag.style.border = '2px solid black';
             priorityFlag.style.borderRadius = '8px';
             priorityFlag.style.padding = '10px';
-            priorityFlag.style.width = 'max-content'
-            flag.classList.add('fa-solid');
-            flag.classList.add('fa-chevron-up');
+            priorityFlag.style.width = 'max-content';
+            const flag = document.createElement('svg');
+            flag.classList.add('thePriorityFlag');
+            flag.style.height = 'min-content';
             priorityFlag.append(flag);
+            priorityFlag.style.display = 'flex';
+            priorityFlag.style.justifyContent = 'center';
+            priorityFlag.style.height = 'min-content';
+            priorityFlag.style.alignSelf = 'center';
         // create the checkbox div and style it
             const checkboxContainer = document.createElement('div');
             checkboxContainer.style.backgroundColor = '#333333';
@@ -104,12 +108,17 @@ function addToDo(){
             `;
             checkboxContainer.style.marginLeft = '5px';
             checkboxContainer.style.marginRight = '5px';
+            checkboxContainer.style.display = 'flex';
+            checkboxContainer.style.justifyContent = 'center';
+            checkboxContainer.style.alignItems = 'center';
+            checkboxContainer.style.minWidth = '32px';
+            checkboxContainer.style.minHeight = '32px';
         // create the task div which provides the task li --- lines 47-58 are additions to the createLi div.
             const createLi = document.createElement('div'); 
-            createLi.classList.add('.createdTask');
+            createLi.classList.add('createdTaskDiv');
             createLi.innerHTML = 
             `
-                <li>${task}</li>
+                <li class="createdTask">${task}</li>
             `;
             createLi.style.backgroundColor = '#333333';
             createLi.style.listStyle = 'none';
@@ -119,14 +128,44 @@ function addToDo(){
             createLi.style.flexDirection = 'row';
             createLi.style.textAlign = 'center';
             createLi.style.padding = '10px';
-            createLi.style.minWidth = '25rem'
+            createLi.style.minWidth = '25rem';
+            createLi.style.maxWidth = '30rem';
             createLi.style.color = '#ffffff';
             createLi.style.font = 'Roboto';
             createLi.style.fontWeight = '500';
+            createLi.style.alignItems = 'center';
+            createLi.style.justifyContent = 'center';
         //create the div and divs for the up and down arrows for priority
             const priorityToggles = document.createElement('div');
             const upPriority = document.createElement('div');
+            const upArrow = document.createElement('svg');
             const downPriority = document.createElement('div');
+            const downArrow = document.createElement('svg');
+            upArrow.classList.add('fa-solid');
+            upArrow.classList.add('fa-arrow-up');
+            downArrow.classList.add('fa-solid');
+            downArrow.classList.add('fa-arrow-down');
+            upPriority.append(upArrow);
+            downPriority.append(downArrow);
+        //create styles for the up and down arrows.
+            upPriority.style.background = '#333333';
+            upPriority.style.border = '2px solid black';
+            upPriority.style.borderRadius = '8px';
+            upPriority.style.padding = '4px 2px';
+            upPriority.classList.add('upThePriority');
+            downPriority.style.background = '#333333';
+            downPriority.style.border = '2px solid black';
+            downPriority.style.borderRadius = '8px';
+            downPriority.style.padding = '4px 2px';
+            downPriority.style.marginTop = '2px';
+            downPriority.classList.add('downThePriority');
+
+        //create style for PriorityToggles
+            priorityToggles.style.marginLeft = '2px';
+            
+            priorityToggles.append(upPriority);
+            priorityToggles.append(downPriority);
+                //chevron-up for high, bars for medium, and chevron-down for low priority.
 
             todoContent.append(priorityFlag)
             todoContent.append(checkboxContainer); //These two combine the checkbox div and the task li divs. 
@@ -138,8 +177,54 @@ function addToDo(){
             
             createTask.value = ''; //Clear the text after submission.
 
-            //DOM for Done button
-            // ---
+
+            const priority = priorityFlag.querySelector('.thePriorityFlag');
+            if (!priority.classList.contains('fa-chevron-up') || !priority.classList.contains('fa-chevron-down') || !priority.classList.contains('fa-bars')){
+                priority.classList.add('fa-solid');
+                priority.classList.add('fa-bars');
+            }
+        //DOM for up priority arrow
+            const upPriorityArrow = document.querySelector('div.upThePriority');
+            upPriorityArrow.addEventListener('click', () => {                
+                //console.log(priority.classList) //debug
+                switch (true) {
+                    case priority.classList.contains('fa-bars'):
+                        priority.classList.remove('fa-bars');
+                        priority.classList.add('fa-chevron-up');
+                        break;
+                    case priority.classList.contains('fa-chevron-down'):
+                        priority.classList.remove('fa-chevron-down');
+                        priority.classList.add('fa-bars');
+                        break;
+                    case priority.classList.contains('fa-chevron-up'):
+                        console.log('You cannot go higher! This task is already at highest priority level!');
+                        break;
+                }
+                
+                
+            });
+        //DOM for down priority arrow
+            const downPriorityArrow = document.querySelector('div.downThePriority');
+            downPriorityArrow.addEventListener('click', downTaskPriority);
+
+            function downTaskPriority(){
+                switch(true){ 
+                case (priority.classList.contains('fa-bars')):
+                    priority.classList.remove('fa-bars');
+                    priority.classList.add('fa-chevron-down');
+                    break;
+                case(priority.classList.contains('fa-chevron-up')):
+                    priority.classList.remove('fa-chevron-up');
+                    priority.classList.add('fa-bars');
+                    break;
+                case(priority.classList.contains('fa-chevron-down')):
+                    console.log('You cannot go lower! This task is already at lowest priority level!');
+                    break;
+                }
+            }
+
+        //DOM for Done button
+        // ---
             const completeTask =  checkboxContainer.querySelector("#taskCheck");
             completeTask.addEventListener('change', toggleDone);
 
@@ -159,6 +244,6 @@ function addToDo(){
                     console.log('Task Done!');
                 }
             }
-    }
+        }
 
 }
