@@ -184,9 +184,9 @@ function addToDo(){
                 priority.classList.add('fa-bars');
             }
         //DOM for up priority arrow
-            const upPriorityArrow = document.querySelector('div.upThePriority');
+            const upPriorityArrow = todoContent.querySelector('div.upThePriority');
             upPriorityArrow.addEventListener('click', () => {                
-                //console.log(priority.classList) //debug
+                
                 switch (true) {
                     case priority.classList.contains('fa-bars'):
                         priority.classList.remove('fa-bars');
@@ -200,11 +200,9 @@ function addToDo(){
                         console.log('You cannot go higher! This task is already at highest priority level!');
                         break;
                 }
-                
-                
             });
         //DOM for down priority arrow
-            const downPriorityArrow = document.querySelector('div.downThePriority');
+            const downPriorityArrow = todoContent.querySelector('div.downThePriority');
             downPriorityArrow.addEventListener('click', downTaskPriority);
 
             function downTaskPriority(){
