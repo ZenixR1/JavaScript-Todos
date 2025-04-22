@@ -17,6 +17,10 @@ const contentContainer = document.querySelector('.content-container')
 const inputContainer = document.querySelector('.input-container');
 //DOM for todo-container
 const todoContainer = document.querySelector('.todo-container');
+//DOM for control buttons
+const controlButtons = document.querySelector('.control-buttons');
+const sortButton = document.querySelector('#button1');
+const alertButton = document.querySelector('#button2');
 
 
 //styling for the body
@@ -34,7 +38,7 @@ todoContainer.style.border = '2px solid black';
 todoContainer.style.borderRadius = '8px';
 todoContainer.style.backgroundColor =' #1a1a1a';
 todoContainer.style.minWidth = '35rem'
-todoContainer.style.minHeight = '10rem';
+todoContainer.style.minHeight = '8rem';
 todoContainer.style.boxShadow = '5px 5px 100px #a200ff'
 //styling for the input field
 inputContainer.style.margin = '8px';
@@ -46,9 +50,66 @@ inputContainer.style.backgroundColor = '#333333';
 inputContainer.style.transition = 'all 1s';
 inputContainer.style.display = 'flex';
 inputContainer.style.justifyContent = 'center';
-inputContainer.style.boxShadow = '2px 2px 15px #a200ff';
+inputContainer.style.boxShadow = '2px 2px 10px #a200ff';
+inputContainer.style.zIndex = '1';
 
+//styling for content-container
+contentContainer.style.position = 'relative';
 
+//styling for control buttons container
+controlButtons.style.position = 'absolute';
+controlButtons.style.top = '0.6rem';
+controlButtons.style.right = '2rem';
+controlButtons.style.display = 'flex';
+controlButtons.style.flexDirection = 'column';
+controlButtons.style.gap = '5px';
+controlButtons.style.zIndex = '2';
+
+//styling for sort button
+sortButton.style.width = '30px';
+sortButton.style.height = '30px';
+sortButton.style.backgroundColor = '#1a1a1a';
+sortButton.style.border = '2px solid black';
+sortButton.style.borderRadius = '8px';
+sortButton.style.boxShadow = '2px 2px 40px #a200ff';
+sortButton.style.cursor = 'pointer';
+sortButton.style.display = 'flex';
+sortButton.style.justifyContent = 'center';
+sortButton.style.alignItems = 'center';
+sortButton.style.transition = 'all 0.3s';
+sortButton.innerHTML = '<i class="fa-solid fa-arrow-down-wide-short"></i>';
+sortButton.style.color = '#ffffff';
+
+// Add hover effect
+sortButton.addEventListener('mouseover', () => {
+    sortButton.style.transform = 'scale(1.1)';
+});
+sortButton.addEventListener('mouseout', () => {
+    sortButton.style.transform = 'scale(1)';
+});
+
+//styling for alertButton
+alertButton.style.width = '30px';
+alertButton.style.height = '30px';
+alertButton.style.backgroundColor = '#1a1a1a';
+alertButton.style.border = '2px solid black';
+alertButton.style.borderRadius = '8px';
+alertButton.style.boxShadow = '2px 2px 40px #a200ff';
+alertButton.style.cursor = 'pointer';
+alertButton.style.display = 'flex';
+alertButton.style.justifyContent = 'center';
+alertButton.style.alignItems = 'center';
+alertButton.style.transition = 'all 0.3s';
+alertButton.innerHTML = '<i class="fa-solid fa-bell"></i>';
+alertButton.style.color = '#ffffff';
+
+// Add hover effect for button2
+alertButton.addEventListener('mouseover', () => {
+    alertButton.style.transform = 'scale(1.1)';
+});
+alertButton.addEventListener('mouseout', () => {
+    alertButton.style.transform = 'scale(1)';
+});
 
 
 //Adding placeholder text to input field as well as padding.
@@ -56,9 +117,6 @@ createTask.placeholder = 'Add a task then press Enter!';
 createTask.textAlign = 'center';
 createTask.style.padding = '8px';
 createTask.style.minWidth = '25rem'
-
-
-
 
 createTask.addEventListener("keydown",function(event){
     if (event.key === "Enter"){
@@ -70,6 +128,8 @@ createTask.addEventListener("keydown",function(event){
 function addToDo(){
     const task = createTask.value; //grabs the value from the input
     const todoContent = document.createElement('div');
+
+    console.log(liContainer.childElementCount)
 
     if (task != ''){ //This if statement prevents an empty submission from being passed.
         //setting the li-container to be flex column
@@ -96,6 +156,7 @@ function addToDo(){
             priorityFlag.style.justifyContent = 'center';
             priorityFlag.style.height = 'min-content';
             priorityFlag.style.alignSelf = 'center';
+            priorityFlag.style.boxShadow = '2px 2px 10px #a200ff';
         // create the checkbox div and style it
             const checkboxContainer = document.createElement('div');
             checkboxContainer.style.backgroundColor = '#333333';
@@ -113,6 +174,7 @@ function addToDo(){
             checkboxContainer.style.alignItems = 'center';
             checkboxContainer.style.minWidth = '32px';
             checkboxContainer.style.minHeight = '32px';
+            checkboxContainer.style.boxShadow = '2px 2px 10px #a200ff';
         // create the task div which provides the task li --- lines 47-58 are additions to the createLi div.
             const createLi = document.createElement('div'); 
             createLi.classList.add('createdTaskDiv');
@@ -135,6 +197,61 @@ function addToDo(){
             createLi.style.fontWeight = '500';
             createLi.style.alignItems = 'center';
             createLi.style.justifyContent = 'center';
+            createLi.style.boxShadow = '2px 2px 10px #a200ff';
+        //create the buttonDiv and style it
+            const buttonDiv = document.createElement('div');
+            buttonDiv.style.display = 'flex';
+            buttonDiv.style.flexDirection = 'row';
+            buttonDiv.style.justifyContent = 'center';
+            buttonDiv.style.alignItems = 'center';
+            buttonDiv.style.marginLeft = 'auto';
+            buttonDiv.style.marginRight = '5px';
+        //create the edit button and style it
+            const editBtn = document.createElement('button');
+            editBtn.style.backgroundColor = '#1a1a1a';
+            editBtn.style.border = '2px solid black';
+            editBtn.style.borderRadius = '8px';
+            editBtn.style.padding = '10px';
+            editBtn.style.color = '#ffffff';
+            editBtn.style.height = '30px';
+            editBtn.style.width = '30px';
+            editBtn.style.marginLeft = '10px';
+            editBtn.style.display = 'flex';
+            editBtn.style.justifyContent = 'center';
+            editBtn.style.alignItems = 'center';
+            editBtn.innerHTML = '<i class="fa-solid fa-pen-to-square"></i>';
+            editBtn.addEventListener('click', () => {
+                const taskText = createLi.querySelector('.createdTask');
+                const newTask = prompt('Edit your task:', taskText.textContent);
+                if (newTask !== null) {
+                    taskText.textContent = newTask;
+                }
+            });
+            buttonDiv.append(editBtn);
+        //create the delete button and style it
+            const deleteBtn = document.createElement('button');
+            deleteBtn.style.backgroundColor = '#1a1a1a';
+            deleteBtn.style.border = '2px solid black';
+            deleteBtn.style.borderRadius = '8px';
+            deleteBtn.style.padding = '10px';
+            deleteBtn.style.color = '#ffffff';
+            deleteBtn.style.height = '30px';
+            deleteBtn.style.width = '30px';
+            deleteBtn.style.marginLeft = '10px';
+            deleteBtn.style.display = 'flex';
+            deleteBtn.style.justifyContent = 'center';
+            deleteBtn.style.alignItems = 'center';
+            deleteBtn.style.justifySelf = 'flex-end';
+            deleteBtn.innerHTML = '<i class="fa-solid fa-trash"></i>';
+            deleteBtn.addEventListener('click', () => {
+                const taskText = createLi.querySelector('.createdTask');
+                const confirmDelete = confirm(`Are you sure you want to delete "${taskText.textContent}"?`);
+                if (confirmDelete) {
+                    liContainer.removeChild(todoContent);
+                }
+            });
+            buttonDiv.append(deleteBtn);
+            createLi.append(buttonDiv);
         //create the div and divs for the up and down arrows for priority
             const priorityToggles = document.createElement('div');
             const upPriority = document.createElement('div');
@@ -148,17 +265,24 @@ function addToDo(){
             upPriority.append(upArrow);
             downPriority.append(downArrow);
         //create styles for the up and down arrows.
-            upPriority.style.background = '#333333';
+            upPriority.style.background = '#1a1a1a';
             upPriority.style.border = '2px solid black';
             upPriority.style.borderRadius = '8px';
             upPriority.style.padding = '4px 2px';
             upPriority.classList.add('upThePriority');
-            downPriority.style.background = '#333333';
+            upPriority.style.color = '#ffffff';
+            upPriority.style.marginBottom = '2px';
+            upPriority.style.marginLeft = '2px';
+            upPriority.style.boxShadow = '2px 2px 10px #a200ff';
+            downPriority.style.background = '#1a1a1a';
             downPriority.style.border = '2px solid black';
             downPriority.style.borderRadius = '8px';
             downPriority.style.padding = '4px 2px';
             downPriority.style.marginTop = '2px';
             downPriority.classList.add('downThePriority');
+            downPriority.style.color = '#ffffff';
+            downPriority.style.marginLeft = '2px';
+            downPriority.style.boxShadow = '2px 2px 10px #a200ff';
 
         //create style for PriorityToggles
             priorityToggles.style.marginLeft = '2px';
