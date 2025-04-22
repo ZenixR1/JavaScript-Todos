@@ -24,7 +24,7 @@ const alertButton = document.querySelector('#button2');
 
 
 //styling for the body
-body.style.backgroundColor = '#333333';
+body.style.backgroundColor = ' #1a1a1a';
 //styling for header
 header.style.backgroundColor = '#1a1a1a';
 header.style.zIndex = '1';
@@ -36,7 +36,7 @@ todoContainer.style.margin = '8px';
 todoContainer.style.padding = '10px';
 todoContainer.style.border = '2px solid black';
 todoContainer.style.borderRadius = '8px';
-todoContainer.style.backgroundColor =' #1a1a1a';
+todoContainer.style.backgroundColor ='#242424';
 todoContainer.style.minWidth = '35rem'
 todoContainer.style.minHeight = '8rem';
 todoContainer.style.boxShadow = '5px 5px 100px #a200ff'
@@ -46,7 +46,7 @@ inputContainer.style.padding = '8px';
 inputContainer.style.border = '2px solid black';
 inputContainer.style.borderRadius = '8px';
 inputContainer.style.alignSelf = 'center';
-inputContainer.style.backgroundColor = '#333333';
+inputContainer.style.backgroundColor = '#242424';
 inputContainer.style.transition = 'all 1s';
 inputContainer.style.display = 'flex';
 inputContainer.style.justifyContent = 'center';
@@ -143,11 +143,12 @@ function addToDo(){
             todoContent.style.margin = '2px';
         //create the div that houses the priority flag
             const priorityFlag = document.createElement('div');
-            priorityFlag.style.backgroundColor = '#333333';
+            priorityFlag.style.backgroundColor = '#1a1a1a';
             priorityFlag.style.border = '2px solid black';
             priorityFlag.style.borderRadius = '8px';
             priorityFlag.style.padding = '10px';
             priorityFlag.style.width = 'max-content';
+            priorityFlag.style.color = '#ffffff';
             const flag = document.createElement('svg');
             flag.classList.add('thePriorityFlag');
             flag.style.height = 'min-content';
@@ -159,7 +160,7 @@ function addToDo(){
             priorityFlag.style.boxShadow = '2px 2px 10px #a200ff';
         // create the checkbox div and style it
             const checkboxContainer = document.createElement('div');
-            checkboxContainer.style.backgroundColor = '#333333';
+            checkboxContainer.style.backgroundColor = '#1a1a1a';
             checkboxContainer.style.border = '2px solid black';
             checkboxContainer.style.borderRadius = '8px';
             checkboxContainer.style.padding = '10px';
@@ -182,7 +183,7 @@ function addToDo(){
             `
                 <li class="createdTask">${task}</li>
             `;
-            createLi.style.backgroundColor = '#333333';
+            createLi.style.backgroundColor = '#1a1a1a';
             createLi.style.listStyle = 'none';
             createLi.style.border = '2px solid black';
             createLi.style.borderRadius = '8px';
