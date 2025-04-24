@@ -40,6 +40,10 @@ todoContainer.style.backgroundColor ='#242424';
 todoContainer.style.minWidth = '35rem'
 todoContainer.style.minHeight = '8rem';
 todoContainer.style.boxShadow = '5px 5px 100px #a200ff'
+//setting the li-container to be flex column
+liContainer.style.display = 'flex';
+liContainer.style.flexDirection = 'column';
+liContainer.style.padding = '0';
 //styling for the input field
 inputContainer.style.margin = '8px';
 inputContainer.style.padding = '8px';
@@ -116,7 +120,7 @@ alertButton.addEventListener('mouseout', () => {
 createTask.placeholder = 'Add a task then press Enter!';
 createTask.textAlign = 'center';
 createTask.style.padding = '8px';
-createTask.style.minWidth = '25rem'
+createTask.style.minWidth = '25rem';
 
 createTask.addEventListener("keydown",function(event){
     if (event.key === "Enter"){
@@ -125,18 +129,28 @@ createTask.addEventListener("keydown",function(event){
     }
 });//Events listener for add button
 
+let todoList = [];
+todoList = JSON.parse(localStorage.getItem('todoList')) || [];
+if (todoList.length > 0){
+    todoList.forEach(todo => {
+        createTask.value = todo;
+        renderTodo(todo);
+    });
+}
+
 function addToDo(){
-    const task = createTask.value; //grabs the value from the input
-    const todoContent = document.createElement('div');
+    const todo = createTask.value;
+    todoList.push(todo);
+    localStorage.setItem('todoList', JSON.stringify(todoList));
+    
+    if (todo != ''){ //This if statement prevents an empty submission from being passed.
+            renderTodo(todo);
+        }
+}
 
-    console.log(liContainer.childElementCount)
-
-    if (task != ''){ //This if statement prevents an empty submission from being passed.
-        //setting the li-container to be flex column
-            liContainer.style.display = 'flex';
-            liContainer.style.flexDirection = 'column';
-            liContainer.style.padding = '0';
-
+function renderTodo(task){
+            //const task = createTask.value; //grabs the value from the input
+            const todoContent = document.createElement('div');
         //setting the todo-container to be flex row
             todoContent.style.display = 'flex';
             todoContent.style.flexDirection = 'row';
@@ -249,6 +263,11 @@ function addToDo(){
                 const confirmDelete = confirm(`Are you sure you want to delete "${taskText.textContent}"?`);
                 if (confirmDelete) {
                     liContainer.removeChild(todoContent);
+                    const index = todoList.indexOf(taskText.textContent);
+                    if (index > -1) {
+                        todoList.splice(index, 1);
+                        localStorage.setItem('todoList', JSON.stringify(todoList));
+                    }
                 }
             });
             buttonDiv.append(deleteBtn);
@@ -297,6 +316,16 @@ function addToDo(){
             todoContent.append(createLi);
             todoContent.append(priorityToggles);
             todoContent.style.zIndex = '1';
+            todoContent.style.margin = '5px 0px';
+
+        //Add hover effect to todoContent
+            todoContent.addEventListener('mouseover', () => {
+                todoContent.style.transform = 'scale(1.08)';
+            });
+            todoContent.addEventListener('mouseout', () => {
+                todoContent.style.transform = 'scale(1)';
+            });
+            todoContent.style.transition = 'all 0.3s';
 
             liContainer.append(todoContent);//This adds the combined divs to the UL "li-container"
             
@@ -367,6 +396,4 @@ function addToDo(){
                     console.log('Task Done!');
                 }
             }
-        }
-
 }
