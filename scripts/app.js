@@ -264,6 +264,13 @@ function renderTodo(task,priorityTag){
                 const newTask = prompt('Edit your task:', taskText.textContent);
                 if (newTask !== null) {
                     taskText.textContent = newTask;
+                    const index = todos.todo.indexOf(task);
+                    if (index > -1) {
+                        todos.todo[index] = newTask;
+                        task = newTask;
+                        localStorage.setItem('todo', JSON.stringify(todos.todo));
+                        todos.todo = JSON.parse(localStorage.getItem('todo'));
+                    }
                 }
             });
             buttonDiv.append(editBtn);
@@ -290,6 +297,8 @@ function renderTodo(task,priorityTag){
                     liContainer.removeChild(todoContent);
                     const index = todos.todo.indexOf(task);
                     if (index > -1) {
+                        todos.todo = JSON.parse(localStorage.getItem('todo'));
+                        todos.priority = JSON.parse(localStorage.getItem('priority'));
                         todos.priority.splice(index, 1);
                         localStorage.setItem('priority', JSON.stringify(todos.priority));
                         todos.todo.splice(index, 1);
