@@ -115,7 +115,6 @@ alertButton.addEventListener('mouseout', () => {
     alertButton.style.transform = 'scale(1)';
 });
 
-
 //Adding placeholder text to input field as well as padding.
 createTask.placeholder = 'Add a task then press Enter!';
 createTask.textAlign = 'center';
@@ -128,33 +127,54 @@ createTask.addEventListener("keydown",function(event){
         console.log('Task has been entered successfully');
     }
 });//Events listener for add button
-
-let todoList = [];
-todoList = JSON.parse(localStorage.getItem('todoList')) || [];
-if (todoList.length > 0){
-    todoList.forEach(todo => {
+const todos = {};
+todos.todo = JSON.parse(localStorage.getItem('todo')) || [];
+todos.priority = JSON.parse(localStorage.getItem('priority')) || [];
+if (todos.todo.length > 0){
+    todos.todo.forEach((todo) => {
         createTask.value = todo;
-        renderTodo(todo);
+        renderTodo(todo,todos.priority[todos.todo.indexOf(todo)]);
+        reIndex();
     });
 }
 
 function addToDo(){
     const todo = createTask.value;
-    todoList.push(todo);
-    localStorage.setItem('todoList', JSON.stringify(todoList));
-    
+    const defaultPriority = 'medium';
+
     if (todo != ''){ //This if statement prevents an empty submission from being passed.
-            renderTodo(todo);
+        todos.todo.push(todo);
+        todos.priority.push(defaultPriority);
+        localStorage.setItem('todo', JSON.stringify(todos.todo));
+        localStorage.setItem('priority',JSON.stringify(todos.priority))
+        todos.todo = JSON.parse(localStorage.getItem('todo'));
+        todos.priority = JSON.parse(localStorage.getItem('priority'));
+        renderTodo(todo,defaultPriority);
+        reIndex();
         }
 }
 
-function renderTodo(task){
-            //const task = createTask.value; //grabs the value from the input
+function reIndex(){
+    const todoItems = document.querySelectorAll('li.createdTask');
+    for(let j = 0; j < todoItems.length; j++){
+        if (todoItems[j].classList.contains(`index`)){
+            todoItems[j].classList.remove(todoItems[j].classList.contains(`index`));
+            todoItems[j].classList.add(`index${j}`);
+        } else {
+            todoItems[j].classList.add(`index${j}`);
+        }
+    }
+}
+
+function renderTodo(task,priorityTag){
+        //const task = createTask.value; //grabs the value from the input
             const todoContent = document.createElement('div');
+
         //setting the todo-container to be flex row
             todoContent.style.display = 'flex';
             todoContent.style.flexDirection = 'row';
             todoContent.style.margin = '2px';
+
         //create the div that houses the priority flag
             const priorityFlag = document.createElement('div');
             priorityFlag.style.backgroundColor = '#1a1a1a';
@@ -172,6 +192,7 @@ function renderTodo(task){
             priorityFlag.style.height = 'min-content';
             priorityFlag.style.alignSelf = 'center';
             priorityFlag.style.boxShadow = '2px 2px 10px #a200ff';
+
         // create the checkbox div and style it
             const checkboxContainer = document.createElement('div');
             checkboxContainer.style.backgroundColor = '#1a1a1a';
@@ -190,6 +211,7 @@ function renderTodo(task){
             checkboxContainer.style.minWidth = '32px';
             checkboxContainer.style.minHeight = '32px';
             checkboxContainer.style.boxShadow = '2px 2px 10px #a200ff';
+
         // create the task div which provides the task li --- lines 47-58 are additions to the createLi div.
             const createLi = document.createElement('div'); 
             createLi.classList.add('createdTaskDiv');
@@ -213,6 +235,7 @@ function renderTodo(task){
             createLi.style.alignItems = 'center';
             createLi.style.justifyContent = 'center';
             createLi.style.boxShadow = '2px 2px 10px #a200ff';
+
         //create the buttonDiv and style it
             const buttonDiv = document.createElement('div');
             buttonDiv.style.display = 'flex';
@@ -221,6 +244,7 @@ function renderTodo(task){
             buttonDiv.style.alignItems = 'center';
             buttonDiv.style.marginLeft = 'auto';
             buttonDiv.style.marginRight = '5px';
+
         //create the edit button and style it
             const editBtn = document.createElement('button');
             editBtn.style.backgroundColor = '#1a1a1a';
@@ -243,6 +267,7 @@ function renderTodo(task){
                 }
             });
             buttonDiv.append(editBtn);
+
         //create the delete button and style it
             const deleteBtn = document.createElement('button');
             deleteBtn.style.backgroundColor = '#1a1a1a';
@@ -263,15 +288,20 @@ function renderTodo(task){
                 const confirmDelete = confirm(`Are you sure you want to delete "${taskText.textContent}"?`);
                 if (confirmDelete) {
                     liContainer.removeChild(todoContent);
-                    const index = todoList.indexOf(taskText.textContent);
+                    const index = todos.todo.indexOf(task);
                     if (index > -1) {
-                        todoList.splice(index, 1);
-                        localStorage.setItem('todoList', JSON.stringify(todoList));
+                        todos.priority.splice(index, 1);
+                        localStorage.setItem('priority', JSON.stringify(todos.priority));
+                        todos.todo.splice(index, 1);
+                        localStorage.setItem('todo', JSON.stringify(todos.todo));
+                        todos.todo = JSON.parse(localStorage.getItem('todo'));
+                        todos.priority = JSON.parse(localStorage.getItem('priority'));
                     }
                 }
             });
             buttonDiv.append(deleteBtn);
             createLi.append(buttonDiv);
+
         //create the div and divs for the up and down arrows for priority
             const priorityToggles = document.createElement('div');
             const upPriority = document.createElement('div');
@@ -284,6 +314,7 @@ function renderTodo(task){
             downArrow.classList.add('fa-arrow-down');
             upPriority.append(upArrow);
             downPriority.append(downArrow);
+
         //create styles for the up and down arrows.
             upPriority.style.background = '#1a1a1a';
             upPriority.style.border = '2px solid black';
@@ -309,10 +340,9 @@ function renderTodo(task){
             
             priorityToggles.append(upPriority);
             priorityToggles.append(downPriority);
-                //chevron-up for high, bars for medium, and chevron-down for low priority.
 
             todoContent.append(priorityFlag)
-            todoContent.append(checkboxContainer); //These two combine the checkbox div and the task li divs. 
+            todoContent.append(checkboxContainer); //These four combine different divs into one.
             todoContent.append(createLi);
             todoContent.append(priorityToggles);
             todoContent.style.zIndex = '1';
@@ -329,26 +359,44 @@ function renderTodo(task){
 
             liContainer.append(todoContent);//This adds the combined divs to the UL "li-container"
             
-            createTask.value = ''; //Clear the text after submission.
-
-
             const priority = priorityFlag.querySelector('.thePriorityFlag');
-            if (!priority.classList.contains('fa-chevron-up') || !priority.classList.contains('fa-chevron-down') || !priority.classList.contains('fa-bars')){
-                priority.classList.add('fa-solid');
-                priority.classList.add('fa-bars');
+            switch(true){
+                case priorityTag === 'low':
+                    priority.classList.add('fa-solid');
+                    priority.classList.add('fa-chevron-down');
+                    break;
+                case priorityTag === 'medium':
+                    priority.classList.add('fa-solid');
+                    priority.classList.add('fa-bars');
+                    break;
+                case priorityTag === 'high':
+                    priority.classList.add('fa-solid');
+                    priority.classList.add('fa-chevron-up');
+                    break;
             }
+            
         //DOM for up priority arrow
             const upPriorityArrow = todoContent.querySelector('div.upThePriority');
-            upPriorityArrow.addEventListener('click', () => {                
-                
+            upPriorityArrow.addEventListener('click', () => {
+                const currentTodoState = JSON.parse(localStorage.getItem('todo'));
+                const currentPriorityState = JSON.parse(localStorage.getItem('priority'));
+
                 switch (true) {
                     case priority.classList.contains('fa-bars'):
                         priority.classList.remove('fa-bars');
                         priority.classList.add('fa-chevron-up');
+                        currentPriorityState[currentTodoState.indexOf(task)] = 'high';
+                        localStorage.setItem('priority', JSON.stringify(currentPriorityState));
+                        todos.todo = currentTodoState;
+                        todos.priority = currentPriorityState;
                         break;
                     case priority.classList.contains('fa-chevron-down'):
                         priority.classList.remove('fa-chevron-down');
                         priority.classList.add('fa-bars');
+                        currentPriorityState[currentTodoState.indexOf(task)] = 'medium';
+                        localStorage.setItem('priority', JSON.stringify(currentPriorityState));
+                        todos.todo = currentTodoState;
+                        todos.priority = currentPriorityState;
                         break;
                     case priority.classList.contains('fa-chevron-up'):
                         console.log('You cannot go higher! This task is already at highest priority level!');
@@ -360,14 +408,25 @@ function renderTodo(task){
             downPriorityArrow.addEventListener('click', downTaskPriority);
 
             function downTaskPriority(){
+                const currentTodoState = JSON.parse(localStorage.getItem('todo'));
+                const currentPriorityState = JSON.parse(localStorage.getItem('priority'));
+
                 switch(true){ 
                 case (priority.classList.contains('fa-bars')):
                     priority.classList.remove('fa-bars');
                     priority.classList.add('fa-chevron-down');
+                    currentPriorityState[currentTodoState.indexOf(task)] = 'low';
+                    localStorage.setItem('priority', JSON.stringify(currentPriorityState));
+                    todos.todo = currentTodoState;
+                    todos.priority = currentPriorityState;
                     break;
                 case(priority.classList.contains('fa-chevron-up')):
                     priority.classList.remove('fa-chevron-up');
                     priority.classList.add('fa-bars');
+                    currentPriorityState[currentTodoState.indexOf(task)] = 'medium';
+                    localStorage.setItem('priority', JSON.stringify(currentPriorityState));
+                    todos.todo = currentTodoState;
+                    todos.priority = currentPriorityState;
                     break;
                 case(priority.classList.contains('fa-chevron-down')):
                     console.log('You cannot go lower! This task is already at lowest priority level!');
@@ -396,4 +455,6 @@ function renderTodo(task){
                     console.log('Task Done!');
                 }
             }
+            createTask.value = ''; //Clear the text after submission.
+
 }
