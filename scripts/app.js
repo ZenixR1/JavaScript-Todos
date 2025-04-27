@@ -170,47 +170,22 @@ function renderTodo(task,priorityTag){
         //const task = createTask.value; //grabs the value from the input
             const todoContent = document.createElement('div');
 
-        //setting the todo-container to be flex row
-            todoContent.style.display = 'flex';
-            todoContent.style.flexDirection = 'row';
-            todoContent.style.margin = '2px';
-
         //create the div that houses the priority flag
             const priorityFlag = document.createElement('div');
-            priorityFlag.style.backgroundColor = '#1a1a1a';
-            priorityFlag.style.border = '2px solid black';
-            priorityFlag.style.borderRadius = '8px';
-            priorityFlag.style.padding = '10px';
-            priorityFlag.style.width = 'max-content';
-            priorityFlag.style.color = '#ffffff';
+            priorityFlag.classList.add('priorityFlag');
             const flag = document.createElement('svg');
             flag.classList.add('thePriorityFlag');
             flag.style.height = 'min-content';
             priorityFlag.append(flag);
-            priorityFlag.style.display = 'flex';
-            priorityFlag.style.justifyContent = 'center';
-            priorityFlag.style.height = 'min-content';
-            priorityFlag.style.alignSelf = 'center';
-            priorityFlag.style.boxShadow = '2px 2px 10px #a200ff';
 
         // create the checkbox div and style it
             const checkboxContainer = document.createElement('div');
-            checkboxContainer.style.backgroundColor = '#1a1a1a';
-            checkboxContainer.style.border = '2px solid black';
-            checkboxContainer.style.borderRadius = '8px';
-            checkboxContainer.style.padding = '10px';
+            checkboxContainer.classList.add('checkboxContainer');
             checkboxContainer.innerHTML = 
             `
             <input type="checkbox" id="taskCheck"/>
             `;
-            checkboxContainer.style.marginLeft = '5px';
-            checkboxContainer.style.marginRight = '5px';
-            checkboxContainer.style.display = 'flex';
-            checkboxContainer.style.justifyContent = 'center';
-            checkboxContainer.style.alignItems = 'center';
-            checkboxContainer.style.minWidth = '32px';
-            checkboxContainer.style.minHeight = '32px';
-            checkboxContainer.style.boxShadow = '2px 2px 10px #a200ff';
+            
 
         // create the task div which provides the task li --- lines 47-58 are additions to the createLi div.
             const createLi = document.createElement('div'); 
@@ -219,45 +194,15 @@ function renderTodo(task,priorityTag){
             `
                 <li class="createdTask">${task}</li>
             `;
-            createLi.style.backgroundColor = '#1a1a1a';
-            createLi.style.listStyle = 'none';
-            createLi.style.border = '2px solid black';
-            createLi.style.borderRadius = '8px';
-            createLi.style.display = 'flex';
-            createLi.style.flexDirection = 'row';
-            createLi.style.textAlign = 'center';
-            createLi.style.padding = '10px';
-            createLi.style.minWidth = '25rem';
-            createLi.style.maxWidth = '30rem';
-            createLi.style.color = '#ffffff';
-            createLi.style.font = 'Roboto';
-            createLi.style.fontWeight = '500';
-            createLi.style.alignItems = 'center';
-            createLi.style.justifyContent = 'center';
-            createLi.style.boxShadow = '2px 2px 10px #a200ff';
+            createLi.classList.add('createLi');//add styling
 
         //create the buttonDiv and style it
             const buttonDiv = document.createElement('div');
-            buttonDiv.style.display = 'flex';
-            buttonDiv.style.flexDirection = 'row';
-            buttonDiv.style.justifyContent = 'center';
-            buttonDiv.style.alignItems = 'center';
-            buttonDiv.style.marginLeft = 'auto';
-            buttonDiv.style.marginRight = '5px';
+            buttonDiv.classList.add('buttonDiv');//add styling
 
         //create the edit button and style it
             const editBtn = document.createElement('button');
-            editBtn.style.backgroundColor = '#1a1a1a';
-            editBtn.style.border = '2px solid black';
-            editBtn.style.borderRadius = '8px';
-            editBtn.style.padding = '10px';
-            editBtn.style.color = '#ffffff';
-            editBtn.style.height = '30px';
-            editBtn.style.width = '30px';
-            editBtn.style.marginLeft = '10px';
-            editBtn.style.display = 'flex';
-            editBtn.style.justifyContent = 'center';
-            editBtn.style.alignItems = 'center';
+            editBtn.classList.add('editBtn')
             editBtn.innerHTML = '<i class="fa-solid fa-pen-to-square"></i>';
             editBtn.addEventListener('click', () => {
                 const taskText = createLi.querySelector('.createdTask');
@@ -277,18 +222,7 @@ function renderTodo(task,priorityTag){
 
         //create the delete button and style it
             const deleteBtn = document.createElement('button');
-            deleteBtn.style.backgroundColor = '#1a1a1a';
-            deleteBtn.style.border = '2px solid black';
-            deleteBtn.style.borderRadius = '8px';
-            deleteBtn.style.padding = '10px';
-            deleteBtn.style.color = '#ffffff';
-            deleteBtn.style.height = '30px';
-            deleteBtn.style.width = '30px';
-            deleteBtn.style.marginLeft = '10px';
-            deleteBtn.style.display = 'flex';
-            deleteBtn.style.justifyContent = 'center';
-            deleteBtn.style.alignItems = 'center';
-            deleteBtn.style.justifySelf = 'flex-end';
+            deleteBtn.classList.add('deleteBtn');
             deleteBtn.innerHTML = '<i class="fa-solid fa-trash"></i>';
             deleteBtn.addEventListener('click', () => {
                 const taskText = createLi.querySelector('.createdTask');
@@ -325,28 +259,13 @@ function renderTodo(task,priorityTag){
             downPriority.append(downArrow);
 
         //create styles for the up and down arrows.
-            upPriority.style.background = '#1a1a1a';
-            upPriority.style.border = '2px solid black';
-            upPriority.style.borderRadius = '8px';
-            upPriority.style.padding = '4px 2px';
+            upPriority.classList.add('downPriority')
             upPriority.classList.add('upThePriority');
-            upPriority.style.color = '#ffffff';
-            upPriority.style.marginBottom = '2px';
-            upPriority.style.marginLeft = '2px';
-            upPriority.style.boxShadow = '2px 2px 10px #a200ff';
-            downPriority.style.background = '#1a1a1a';
-            downPriority.style.border = '2px solid black';
-            downPriority.style.borderRadius = '8px';
-            downPriority.style.padding = '4px 2px';
-            downPriority.style.marginTop = '2px';
+            downPriority.classList.add('downPriority')
             downPriority.classList.add('downThePriority');
-            downPriority.style.color = '#ffffff';
-            downPriority.style.marginLeft = '2px';
-            downPriority.style.boxShadow = '2px 2px 10px #a200ff';
 
         //create style for PriorityToggles
-            priorityToggles.style.marginLeft = '2px';
-            
+            priorityToggles.classList.add('priorityToggles')
             priorityToggles.append(upPriority);
             priorityToggles.append(downPriority);
 
@@ -354,8 +273,7 @@ function renderTodo(task,priorityTag){
             todoContent.append(checkboxContainer); //These four combine different divs into one.
             todoContent.append(createLi);
             todoContent.append(priorityToggles);
-            todoContent.style.zIndex = '1';
-            todoContent.style.margin = '5px 0px';
+            todoContent.classList.add('todoContent');
 
         //Add hover effect to todoContent
             todoContent.addEventListener('mouseover', () => {
