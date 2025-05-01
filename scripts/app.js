@@ -22,67 +22,12 @@ const controlButtons = document.querySelector('.control-buttons');
 const sortButton = document.querySelector('#button1');
 const alertButton = document.querySelector('#button2');
 
-
-//styling for the body
-body.style.backgroundColor = ' #1a1a1a';
-//styling for header
-header.style.backgroundColor = '#1a1a1a';
-header.style.zIndex = '1';
-header.style.boxShadow = '2px 2px 15px #a200ff';
-//styling for todo container
-todoContainer.style.display = 'flex';
-todoContainer.style.flexDirection = 'column';
-todoContainer.style.margin = '8px';
-todoContainer.style.padding = '10px';
-todoContainer.style.border = '2px solid black';
-todoContainer.style.borderRadius = '8px';
-todoContainer.style.backgroundColor ='#242424';
-todoContainer.style.minWidth = '35rem'
-todoContainer.style.minHeight = '8rem';
-todoContainer.style.boxShadow = '5px 5px 100px #a200ff'
-//setting the li-container to be flex column
-liContainer.style.display = 'flex';
-liContainer.style.flexDirection = 'column';
-liContainer.style.padding = '0';
-//styling for the input field
-inputContainer.style.margin = '8px';
-inputContainer.style.padding = '8px';
-inputContainer.style.border = '2px solid black';
-inputContainer.style.borderRadius = '8px';
-inputContainer.style.alignSelf = 'center';
-inputContainer.style.backgroundColor = '#242424';
-inputContainer.style.transition = 'all 1s';
-inputContainer.style.display = 'flex';
-inputContainer.style.justifyContent = 'center';
-inputContainer.style.boxShadow = '2px 2px 10px #a200ff';
-inputContainer.style.zIndex = '1';
-
-//styling for content-container
-contentContainer.style.position = 'relative';
-
 //styling for control buttons container
-controlButtons.style.position = 'absolute';
-controlButtons.style.top = '0.6rem';
-controlButtons.style.right = '2rem';
-controlButtons.style.display = 'flex';
-controlButtons.style.flexDirection = 'column';
-controlButtons.style.gap = '5px';
-controlButtons.style.zIndex = '2';
+controlButtons.classList.add('controlButtons');
 
 //styling for sort button
-sortButton.style.width = '30px';
-sortButton.style.height = '30px';
-sortButton.style.backgroundColor = '#1a1a1a';
-sortButton.style.border = '2px solid black';
-sortButton.style.borderRadius = '8px';
-sortButton.style.boxShadow = '2px 2px 40px #a200ff';
-sortButton.style.cursor = 'pointer';
-sortButton.style.display = 'flex';
-sortButton.style.justifyContent = 'center';
-sortButton.style.alignItems = 'center';
-sortButton.style.transition = 'all 0.3s';
+sortButton.classList.add('sortButton');
 sortButton.innerHTML = '<i class="fa-solid fa-arrow-down-wide-short"></i>';
-sortButton.style.color = '#ffffff';
 
 // Add hover effect
 sortButton.addEventListener('mouseover', () => {
@@ -93,19 +38,8 @@ sortButton.addEventListener('mouseout', () => {
 });
 
 //styling for alertButton
-alertButton.style.width = '30px';
-alertButton.style.height = '30px';
-alertButton.style.backgroundColor = '#1a1a1a';
-alertButton.style.border = '2px solid black';
-alertButton.style.borderRadius = '8px';
-alertButton.style.boxShadow = '2px 2px 40px #a200ff';
-alertButton.style.cursor = 'pointer';
-alertButton.style.display = 'flex';
-alertButton.style.justifyContent = 'center';
-alertButton.style.alignItems = 'center';
-alertButton.style.transition = 'all 0.3s';
+alertButton.classList.add('alertButton');
 alertButton.innerHTML = '<i class="fa-solid fa-bell"></i>';
-alertButton.style.color = '#ffffff';
 
 // Add hover effect for button2
 alertButton.addEventListener('mouseover', () => {
@@ -114,12 +48,6 @@ alertButton.addEventListener('mouseover', () => {
 alertButton.addEventListener('mouseout', () => {
     alertButton.style.transform = 'scale(1)';
 });
-
-//Adding placeholder text to input field as well as padding.
-createTask.placeholder = 'Add a task then press Enter!';
-createTask.textAlign = 'center';
-createTask.style.padding = '8px';
-createTask.style.minWidth = '25rem';
 
 createTask.addEventListener("keydown",function(event){
     if (event.key === "Enter"){

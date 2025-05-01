@@ -1,5 +1,5 @@
 :root{
-    --main-color: #313131;
+    --main-color: #1a1a1a;
     --second-color: #414141;
     --third-color: #525252;
     --accent-color: #a200ff;
@@ -29,6 +29,9 @@ body{
     padding: 15px;
     border: 2px solid black;
     border-radius: 5px;
+    box-shadow: 2px 2px 15px #a200ff;
+    z-index: 1;
+    background-color: #1a1a1a;
 }
 
 .mainHeader{
@@ -43,7 +46,21 @@ body{
     flex-direction: column;
     align-items: center;
     width:800px;
+    position: relative;
+}
 
+.input-container{
+    margin: 8px;
+    padding: 8px;
+    border: 2px solid black;
+    border-radius: 8px;
+    background-color: #242424;
+    box-shadow: 2px 2px 10px #a200ff;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    transition: all 0.6s;
+    z-index: 1;
 }
 
 .input-container:hover{
@@ -90,6 +107,17 @@ li.createdTask{
     z-index: 1;
     margin: 7px 2px;
     display:flex;
+}
+.todo-container{
+    display: flex;
+    flex-direction: column;
+    margin: 8px;
+    padding: 10px;
+    border: 2px solid black;
+    background-color: #242424;
+    min-width: 35rem;
+    min-height: 8rem;
+    box-shadow: 5px 5px 100px #a200ff;
 }
 .priorityToggles{
     margin-left:2px;
@@ -179,3 +207,58 @@ li.createdTask{
     align-self: center;
     box-shadow: 2px 2px 10px #a200ff;
 }
+
+#createTask::placeholder{
+    color: #1b1b1b;
+}
+#createTask{
+    padding: 8px;
+    min-width: 25rem;
+    text-align: center;
+}
+
+.alertButton{
+    width: 30px;
+    height: 30px;
+    background-color: #1a1a1a;
+    border: 2px solid black;
+    border-radius: 8px;
+    box-shadow: 2px 2px 40px #a200ff;
+    cursor:pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s;
+    color: #ffffff;
+}
+.sortButton{
+    width: 30px;
+    height: 30px;
+    background-color: #1a1a1a;
+    border: 2px solid black;
+    border-radius: 8px;
+    box-shadow: 2px 2px 40px #a200ff;
+    cursor:pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s;
+    color: #ffffff;
+}
+
+.controlButtons{
+    position: absolute;
+    top: 0.6rem;
+    right: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    z-index: 2;
+}
+
+.li-container{
+    display: flex;
+    flex-direction: column;
+    padding: 0px;
+}
+
