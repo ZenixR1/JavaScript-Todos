@@ -1,6 +1,4 @@
 
-Created by ZenixR6 (GitHub name ZenixR1)
-
 This todo list was started from a project as part of the LetPhil community course on Javascript. At first it was very basic, no styling, just a nice and simple input field with a add button. You could select a done button to put a strikethrough. After that, they said to spiffy it up! Add some additional functionality and styling.
 
 Current Functionality:
